@@ -91,6 +91,7 @@ export default class ReactBubbleChartD3 {
       .style('top', top + 'px');   // center vertically;
 
     // create the bubble layout that we will use to position our bubbles\
+    console.log(d3);
     this.bubble = d3.layout.pack()
       .sort(null)
       .size([this.diameter, this.diameter])
@@ -243,6 +244,7 @@ export default class ReactBubbleChartD3 {
       .style('left', d =>  d.x - d.r + 'px')
       .style('top', d =>  d.y - d.r + 'px')
       .style('opacity', 1)
+      .style('background-color', d => d.selected ? this.selectedColor : color(d.colorValue))
       .style('color', d => d.selected ? this.selectedTextColor : textColor(d.colorValue))
       .attr('class', d => {
         var size;
