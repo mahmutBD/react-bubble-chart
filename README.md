@@ -1,4 +1,4 @@
-# React Bubble Chart
+# Fork React Bubble Chart
 
 A combination React/D3 bubble chart that animates color/size/position when
 updating data sets.
