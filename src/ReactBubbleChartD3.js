@@ -197,7 +197,7 @@ export default class ReactBubbleChartD3 {
     const delay = this.delay;
 
     // define a color scale for our colorValues
-    const color = this.colorRange;
+    const color = (index) => this.colorRange[index];
 
     // define a color scale for text town
     const textColor = d3.scale.quantize()
