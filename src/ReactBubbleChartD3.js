@@ -197,12 +197,7 @@ export default class ReactBubbleChartD3 {
     const delay = this.delay;
 
     // define a color scale for our colorValues
-    const color = d3.scale.quantize()
-      .domain([
-        props.fixedDomain ? props.fixedDomain.min : d3.min(data, d => d.colorValue),
-        props.fixedDomain ? props.fixedDomain.max : d3.max(data, d => d.colorValue)
-      ])
-      .range(this.colorRange);
+    const color = this.colorRange;
 
     // define a color scale for text town
     const textColor = d3.scale.quantize()
@@ -234,8 +229,7 @@ export default class ReactBubbleChartD3 {
       .style('opacity', 1)
       .style('fill', d => d.selected ? this.selectedColor : color(d.colorValue));
     // for the labels we transition their height, width, left, top, and color
-    labels
-      .append(d => d.value)
+    labels.html(d=>d.value)
       .on('mouseover', this._tooltipMouseOver.bind(this, color, el))
       .transition()
       .duration(duration)
@@ -245,6 +239,7 @@ export default class ReactBubbleChartD3 {
       .style('left', d =>  d.x - d.r + 'px')
       .style('top', d =>  d.y - d.r + 'px')
       .style('opacity', 1)
+      .style('z-index', (d, i) => labels[0].length - i)
       .style('background-color', d => d.selected ? this.selectedColor : color(d.colorValue))
       .style('color', d => d.selected ? this.selectedTextColor : textColor(d.colorValue))
       .attr('class', d => {
